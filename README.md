@@ -16,32 +16,32 @@ The following functionality must be supported, but we are not prescribing the ex
 
 Your program should be able to:
 
-Add a new user to the system
+1. Add a new user to the system
 
-Make a friendship connection between two users, if that friendship does not yet exist. You should support friendship connections between the Primary User and other users, and also between pairs of other users.
+2. Make a friendship connection between two users, if that friendship does not yet exist. You should support friendship connections between the Primary User and other users, and also between pairs of other users.
 
-Break a friendship connection between two specified users, if one exists.
+3. Break a friendship connection between two specified users, if one exists.
 
-Add a new song to the system. It is highly recommended that you reuse functionality to read songs from files, as you did in CA3. This will allow you to add many songs with minimal typing, and is more convenient than piping data and reading from standard input (ala CA2). If none of your group members has code that does this well (unlikely!), we will give you code to read songs from files. Note that this operation adds a song to "the system", but not to the Primary User's library. The only way that songs can be added to the Primary User's library is through the recommendation system (see below).
+4. Add a new song to the system. It is highly recommended that you reuse functionality to read songs from files, as you did in CA3. This will allow you to add many songs with minimal typing, and is more convenient than piping data and reading from standard input (ala CA2). If none of your group members has code that does this well (unlikely!), we will give you code to read songs from files. Note that this operation adds a song to "the system", but not to the Primary User's library. The only way that songs can be added to the Primary User's library is through the recommendation system (see below).
 
-Have a user listen to a song N times. If the song is in the Primary User's library, this operation has no real effect. If the song is not in the Primary User's library, then the Primary User cares about this information if and only if the user who listens is within the "sphere of influence" of the Primary User. Basically, the goal of the Music Social Network is to track which songs the Primary User's friends (and potentially friends of friends... and friends of friends of friends, etc.) are listening to, in order to bring those songs to the attention of the Primary User, by adding them to the Primary User's library, as described further below. We will call this sphere of influence the Extended Friendship Network (EFN) of the Primary User.
+5. Have a user listen to a song N times. If the song is in the Primary User's library, this operation has no real effect. If the song is not in the Primary User's library, then the Primary User cares about this information if and only if the user who listens is within the "sphere of influence" of the Primary User. Basically, the goal of the Music Social Network is to track which songs the Primary User's friends (and potentially friends of friends... and friends of friends of friends, etc.) are listening to, in order to bring those songs to the attention of the Primary User, by adding them to the Primary User's library, as described further below. We will call this sphere of influence the Extended Friendship Network (EFN) of the Primary User.
 
 You may assume that if a user listens to a song, then that song is in that user's library. This means that you only have to have one library of songs, namely for the Primary User.
 
-Set the EFN radius to K, where K is a small positive number. This operation influences which song listens, by friends, influence the Primary User.
+6. Set the EFN radius to K, where K is a small positive number. This operation influences which song listens, by friends, influence the Primary User.
 Importantly (and this makes things easier for you), the Primary User only cares about song listens that happen while a user is within the Primary User's EFN. (a) Suppose the EFN radius is 1, and George is a friend of a friend, but not a friend, of the Primary User. If George listens to a song 10 times, then becomes a friend of the Primary User, and then listens to the song another 5 times, the system should only reflect the 5 recent listens, not all 15, when deciding recommendations. (b) Likewise, if Adriana listens to a song 10 times, then a friendship connection is established that puts her into the EFN of the Primary User, and then she listens to the song another 5 times... only the 5 most recent listens matter, not the initial 10. (c) Similarly, if Leo is within the Primary User's EFN, and then Leo stabs someone in the back and a friendship is broken that takes Leo out of the EFN, your program should not try to "undo" any of Leo's previous listens.
 
 Also important: Please implement this program for EFN = 1 only, first. That is significantly easier than supporting a general ENF radius of K. You can add that functionality later.
 
-Recommend and add to the Primary User's library, the top K songs that users from the Primary User's EFN have been listening to. More specifically, this operation should add the K songs that are not in the Primary User's library, and that have the most listens by users while they were in the Primary User's EFN. K should be selected by the user of your program. (In other words, whoever runs your program should be able to select the top 3 songs with one operation and then the top 5 with the next, substituting any positive integer for K each time). This should print out the song info for all the recommended songs and automatically add them to the Primary User's library.
+7. Recommend and add to the Primary User's library, the top K songs that users from the Primary User's EFN have been listening to. More specifically, this operation should add the K songs that are not in the Primary User's library, and that have the most listens by users while they were in the Primary User's EFN. K should be selected by the user of your program. (In other words, whoever runs your program should be able to select the top 3 songs with one operation and then the top 5 with the next, substituting any positive integer for K each time). This should print out the song info for all the recommended songs and automatically add them to the Primary User's library.
 
-Remove a song from the Primary User's library. This song may later be recommended to the user, but only if it gets enough new listens within the EFN. So when a song moves into the Primary User's library, then gets removed, it's listen count should be reset to 0. Once a song is added to the system (as opposed to the Primary User's library), it cannot be removed.
+8. Remove a song from the Primary User's library. This song may later be recommended to the user, but only if it gets enough new listens within the EFN. So when a song moves into the Primary User's library, then gets removed, it's listen count should be reset to 0. Once a song is added to the system (as opposed to the Primary User's library), it cannot be removed.
 
-Show a list of friends, for the Primary User or for other users, as indicated by the user of your program.
+9. Show a list of friends, for the Primary User or for other users, as indicated by the user of your program.
 
-Show songs in the Primary User's library.
+10. Show songs in the Primary User's library.
 
-Show songs that are in the system but not in the Primary User's library, along with the number of relevant listens by users in the EFN. You may want to allow the user of your program to limit the number of songs that are shown (like the show() function from CA4).
+11. Show songs that are in the system but not in the Primary User's library, along with the number of relevant listens by users in the EFN. You may want to allow the user of your program to limit the number of songs that are shown (like the show() function from CA4).
 
 Implementation Requirements
 
